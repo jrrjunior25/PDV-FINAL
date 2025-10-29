@@ -1,0 +1,5 @@
+{
+  "name": "Ponto de Venda Inteligente",
+  "description": "Um sistema de ponto de venda (PDV) completo, desenvolvido em React e TailwindCSS, com funcionalidades de gestão de vendas, produtos, clientes, e geração de pagamentos via PIX com emissão de recibo NFC-e simulado.",
+  "requestFramePermissions": []
+}
