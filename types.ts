@@ -1,4 +1,3 @@
-
 // types.ts
 
 export enum UserRole {
@@ -18,8 +17,19 @@ export interface Product {
   code: string;
   name: string;
   price: number;
+  costPrice: number; // Preço de custo para cálculo de lucro
   unit: string;
   stock: number;
+  // --- Novos campos fiscais ---
+  ncm: string; // Nomenclatura Comum do Mercosul
+  cest: string; // Código Especificador da Substituição Tributária
+  cfop: string; // Código Fiscal de Operações e Prestações
+  origin: string; // Origem da mercadoria (ex: 0 - Nacional)
+  taxes: {
+    icms: number; // %
+    pis: number;  // %
+    cofins: number; // %
+  };
 }
 
 export interface Customer {
@@ -39,6 +49,13 @@ export enum PaymentMethod {
   DINHEIRO = 'DINHEIRO',
   CARTAO = 'CARTAO',
   PIX = 'PIX',
+  A_PRAZO = 'A PRAZO',
+}
+
+export enum SaleStatus {
+    PAGO = 'PAGO',
+    PENDENTE = 'PENDENTE',
+    CANCELADO = 'CANCELADO',
 }
 
 export interface Sale {
@@ -56,4 +73,23 @@ export interface Sale {
     paid: boolean;
   };
   timestamp: Date;
+  status: SaleStatus;
+}
+
+// Para o módulo Financeiro
+export interface AccountReceivable {
+    id: string;
+    saleId: string;
+    customerName: string;
+    amount: number;
+    dueDate: Date;
+    status: 'PENDENTE' | 'PAGO';
+}
+
+export interface AccountPayable {
+    id: string;
+    description: string;
+    amount: number;
+    dueDate: Date;
+    status: 'PENDENTE' | 'PAGO';
 }
